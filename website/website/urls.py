@@ -15,12 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from website.views import hello, current_datetime, hours_ahead,hello_world,homepage_view, display_meta
+from website.views import hello, current_datetime, hours_ahead,hello_world,homepage_view,display_meta
 from books import views
 
 
 urlpatterns = [
-	url(r'^meta/$', views.display_meta),
 	url(r'^$', homepage_view),
     url(r'^admin/', admin.site.urls),
 	url(r'^hello/$', hello_world),
@@ -29,6 +28,7 @@ urlpatterns = [
 	url(r'^search-form/$', views.search_form),
 	url(r'^search/$', views.search),
     url(r'^meta/$', display_meta),
+    url(r'^printall/$', views.printall),
 
 
 ]

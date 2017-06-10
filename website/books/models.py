@@ -22,6 +22,5 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher)
     publication_date = models.DateField()
     def __str__(self):
-        return self.title
-
+        return self.title+" "
 # Create your models here.
