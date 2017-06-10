@@ -20,6 +20,7 @@ from books import views
 
 
 urlpatterns = [
+	url(r'^meta/$', views.display_meta),
 	url(r'^$', homepage_view),
     url(r'^admin/', admin.site.urls),
 	url(r'^hello/$', hello_world),
