@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 X=[]
 Y=[]
 def RKindex(request):
-	now = datetime.datetime.now()
-	return render(request, 'equations_show.html', {'currentTime':now, 'dept':'碩一0551287張為舜'})
+    now = datetime.datetime.now()
+    return render(request, 'equations_show.html', {'currentTime':now, 'dept':'碩一0551287張為舜'})
 def func(t,u,P,K,C,M):
 	return [u[1],(P-K*u[0]-C*u[1])/M]
 def RungeKutta(request):
@@ -65,5 +65,9 @@ def simple(request):
     canvas=FigureCanvas(fig)
     response=HttpResponse(content_type='image/png')
     canvas.print_png(response)
+    global X
+    X=[]
+    global Y
+    Y=[]
     return response
 # Create your views here.
