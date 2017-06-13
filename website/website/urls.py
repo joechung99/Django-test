@@ -31,4 +31,5 @@ urlpatterns = [
     url(r'^printall/$', views.printall),
     url(r'^rk/', eviews.RKindex),
     url(r'^RungeKutta/', eviews.RungeKutta),
+	url(r'^simple/$', eviews.simple,name="simple"),
 ]

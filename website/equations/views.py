@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 #import matplotlib.pyplot as plt
 #from matplotlib import interactive
 #interactive(True)
+X=[]
+Y=[]
 def RKindex(request):
 	now = datetime.datetime.now()
 	return render(request, 'equations_show.html', {'currentTime':now, 'dept':'碩一0551287張為舜'})
@@ -26,8 +28,8 @@ def RungeKutta(request):
         u = [int(request.GET['U0value']),int(request.GET['U1value'])]
         if 'secvalue' in request.GET:
             sec = int(request.GET['secvalue'])
-        X = []
-        Y = []
+        #X = []
+        #Y = []
         dt=0.01
         for i in range(int(sec/dt)):
             t=i*dt
@@ -43,12 +45,25 @@ def RungeKutta(request):
             k4=func(t+dt,u1,P,K,C,M)
             u=[u[0]+dt/6*(k1[0]+2*k2[0]+2*k3[0]+k4[0]),u[1]+dt/6*(k1[1]+2*k2[1]+2*k3[1]+k4[1])]
         #return render(request, 'equations_result.html', {'solution':Y})
-        plt.xlabel('t')
-        plt.ylabel('y')
-        plt.plot(X,Y)
-        plt.show()
+        #response=simple(request)
+        #return response
+        #plt.xlabel('t')
+        #plt.ylabel('y')
+        #plt.plot(X,Y)
+        #plt.show()
         return render(request, 'equations_result.html', {'currentTime':now, 'dept':'碩一0551287張為舜','solution':Y})
     except Exception as e:
     	return render(request, 'equations_result.html', {'solution':'ERROR'})
+def simple(request):
+    from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+    from matplotlib.figure import Figure
+    from matplotlib.dates import DateFormatter
 
+    fig=Figure()
+    ax=fig.add_subplot(111)
+    ax.plot(X, Y)
+    canvas=FigureCanvas(fig)
+    response=HttpResponse(content_type='image/png')
+    canvas.print_png(response)
+    return response
 # Create your views here.
